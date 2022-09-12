@@ -1,15 +1,17 @@
 const startStop = (func, funcStop) => {
+  const continueGame = () => {
+    const continueBlock = document.querySelector('.continue')
+    continueBlock.style.display = 'inline-flex'
+    continueBlock.addEventListener('click', () => {
+      document.addEventListener('keydown', func)
+      continueBlock.style.display = 'none'
+    })
+  }
   document.addEventListener('keydown', (e) => {
     if (e.keyCode == '27') {
       funcStop()
       document.removeEventListener('keydown', func)
-
-      document.querySelector('.continue').style.display = 'inline-flex'
-      document.querySelector('.continue').addEventListener('click', () => {
-        document.addEventListener('keydown', func)
-        document.querySelector('.continue').style.display = 'none'
-        // document.removeEventListener('keydown', func)
-      })
+      continueGame()
     }
   })
 }
